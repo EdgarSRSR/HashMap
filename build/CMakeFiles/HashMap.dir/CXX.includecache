@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/hashmap.h
+iostream
+-
+stdio.h
+-
+list
+-
+cstddef
+-
+string
+-
+
+/Users/edgarsr/Documents/hashmap/src/main.cpp
+iostream
+-
+cstddef
+-
+hashmap.h
+/Users/edgarsr/Documents/hashmap/src/hashmap.h
+
