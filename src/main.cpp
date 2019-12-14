@@ -4,8 +4,7 @@
 
 int main(){
 	    // insert code here...
-    std::cout << "Hello, World!\n";
-    std::cout << "hi";
+    std::cout << "HashMap example";
     hashmap<std::string,int> hashy;
     hashy.insert("juan", 34);
     hashy.insert("lera", 22);
@@ -26,14 +25,21 @@ int main(){
     
     while(name != "exit"){
         //std::cout << "search for";
-        std::cout << "remove ";
+        std::cout << "remove this element: (type exit to end loop)";
         std::cin >> name;
         if(name != "exit"){
             //hashy.finder(name);
             hashy.remove(name);
+        }else{
+            break;
         }
+
     }
     hashy.bucketContent(0);
     hashy.printMap();
+    hashy.get("mereke");
+    hashy.get("michael");
+    hashy.iteratorbegin(34);
+    std::cout<<"example using the iterator to get a key, key from value 34: "<<hashy.iteratorbegin(34)->key<< " \n";
     return 0;
 }

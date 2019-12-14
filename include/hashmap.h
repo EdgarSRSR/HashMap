@@ -83,8 +83,10 @@ public:
         bool foundname = false;
         v value;
         std::string result;
-         // goes directly to the bucket by calculating the index and starts looking through the elements of th bucket
+        // goes directly to the bucket by calculating the index and starts looking
+        //through the elements of th bucket
         bucket* Ptr = HashMap[index];
+        try{
         while(Ptr != NULL){
             if(Ptr->key == key){
                 foundname = true;
@@ -96,14 +98,22 @@ public:
         }
         if(foundname == true){
             //returns the value
-            std::cout << "value = " << result << std::endl;
+            std::cout << "value of " << key << "= " << result << std::endl;
+            value = Ptr->value;
             return value;
         } else {
             //if the element doesn't exists  it returns a message
             std::cout << key << " was not found\n";
+            //value = Ptr->value;
+            value = 0;
+            return value;
             
         }
-    }
+        } catch(const char* msg){
+            std::cerr << msg <<std::endl;
+            return value;
+        }
+    };
     
     //Return current size of hashmap
     int sizeofMap()
@@ -136,24 +146,40 @@ public:
     }
 
     // an iterator, it starts from the beginning and looks for a value all over the hashmap
-    bucket iterator(v value){
-        bucket interbucket = HashMap[0];
-        for(int i = 0; i <= hashmapsize; i++){
-            interbucket = HashMap[i];
-            int elementnumber = interbucket[i].count(i);
-            if(interbucket->value == value){
-                return interbucket;
-            } else if (interbucket->value != value && elementnumber > 1){
-                interbucket = interbucket->next;
-                for(int j = 1; j <= elementnumber; j++){
-                    if(interbucket->value == value){
-                        return interbucket;
-                    }else{
-                        interbucket = interbucket->next;
-                    }
+    bucket* iteratorbegin(v value){
+        bucket* interbucket = HashMap[0];
+        bool found = false;
+        try{
+            for(int i = 0; i <= hashmapsize; i++){
+                interbucket = HashMap[i];
+                int elementnumber = count(i);
+                if(interbucket->value == value){
+                    found = true;
+                    return interbucket;
+                    break;
+                } else if (interbucket->value != value && elementnumber > 1){
+                    interbucket = interbucket->next;
+                    for(int j = 1; j <= elementnumber; j++){
+                        if(interbucket->value == value){
+                            found = true;
+                            return interbucket;
+                            break;
+                        }else{
+                            interbucket = interbucket->next;
+                        }
+                    
+                        }
+                }else{
+                    continue;
                 }
-            }
         }
+        }catch(const char* msg){
+            std::cerr << msg <<std::endl;
+            interbucket = NULL;
+        }
+        std::cout << " iterator didn't find value\n";
+        interbucket = NULL;
+        return interbucket;
     }
     
     //this function prints the hashmap it shows the index of each bucket, the key and value of the first
@@ -163,12 +189,12 @@ public:
         int number;
         for(int i = 0; i<hashmapsize; i++){
             number = count(i);
-            std::cout << "----------------\n";
+            std::cout << "*****************\n";
             std::cout << "index = " << i << std::endl;
             std::cout << HashMap[i]->key << std::endl;
             std::cout << HashMap[i]->value << std::endl;
             std::cout << "number of items = " << number << std::endl;
-            std::cout << "----------------\n";
+            std::cout << "*****************\n";
         }
     }
     
