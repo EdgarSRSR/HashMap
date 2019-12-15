@@ -15,7 +15,7 @@
 template <typename k, typename v>
 class hashmap{
 private:
-
+    using value_type = std::pair<const k, v>;
     // determines size of the hash map
     static const int hashmapsize = 10;
 
@@ -55,19 +55,19 @@ public:
     }
     
     //inserts a new key and value to the hashmap
-    void insert( k key, v value){
-        int index = hashfunc(key);
+      void insert( const value_type & obj){
+        int index = hashfunc(obj.first);
         std::string checker = std::string(HashMap[index]->key);
         // if the bucket is free
         if(checker.length()==0){
-            HashMap[index]->key = key;
-            HashMap[index]->value = value;
+            HashMap[index]->key = obj.first;
+            HashMap[index]->value = obj.second;
         } else{
             // else it starts creating a linked list
             bucket* Ptr = HashMap[index];
             bucket* n = new bucket;
-            n->key = key;
-            n->value = value;
+            n->key = obj.first;
+            n->value = obj.second;
             n->next = NULL;
             while(Ptr->next != NULL){
                 Ptr = Ptr->next;
@@ -155,8 +155,8 @@ public:
     bucket* end(){
         int ending = hashmapsize - 1;
         bucketContent(ending);
-        bucket* end = Hashmap[ending];
-        return ending;
+        bucket* end = HashMap[ending];
+        return end;
     }
     // an iterator, it starts from the beginning and looks for a value all over the hashmap
     bucket* iteratorbegin(v value){
