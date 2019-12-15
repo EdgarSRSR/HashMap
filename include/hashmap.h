@@ -77,7 +77,7 @@ public:
     };
     
     //Function to search the value for a given key
-    v get(k key)
+    v at(k key)
     {
         int index = hashfunc(key);
         bool foundname = false;
@@ -217,7 +217,7 @@ public:
     }
     
     // removes a key and its value from the hashmap
-     void remove(k key){
+     void erase(k key){
      int index = hashfunc(key);
      bucket* delPtr;
      bucket* p1;
