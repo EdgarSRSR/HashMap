@@ -144,7 +144,20 @@ public:
         }
         return count;
     }
-
+    
+    //returns the first bucket of the hashmap
+    bucket* begin(){
+        bucketContent(0);
+        bucket* begin = HashMap[0];
+        return begin;
+    }
+    //returns last bucket of the hash map
+    bucket* end(){
+        int ending = hashmapsize - 1;
+        bucketContent(ending);
+        bucket* end = Hashmap[ending];
+        return ending;
+    }
     // an iterator, it starts from the beginning and looks for a value all over the hashmap
     bucket* iteratorbegin(v value){
         bucket* interbucket = HashMap[0];
