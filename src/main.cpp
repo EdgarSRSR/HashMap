@@ -29,7 +29,7 @@ int main(){
         std::cin >> name;
         if(name != "exit"){
             //hashy.finder(name);
-            hashy.remove(name);
+            hashy.erase(name);
         }else{
             break;
         }
@@ -37,8 +37,8 @@ int main(){
     }
     hashy.bucketContent(0);
     hashy.printMap();
-    hashy.get("mereke");
-    hashy.get("michael");
+    hashy.at("mereke");
+    hashy.at("michael");
     hashy.iteratorbegin(34);
     std::cout<<"example using the iterator to get a key, key from value 34: "<<hashy.iteratorbegin(34)->key<< " \n";
     return 0;
